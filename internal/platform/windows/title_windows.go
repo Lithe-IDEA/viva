@@ -9,8 +9,10 @@ import (
 
 // wmSetTitle asks the window thread to apply the title SetTitle stored.
 // SetWindowTextW from another thread would send WM_SETTEXT and wait for the
-// window thread, so the change is posted instead.
-const wmSetTitle = 0x8052
+// window thread, so the change is posted instead. Its number is the next free
+// one after wmSetSize (0x8052): the window procedure switches on every private
+// message, and two of them with one number do not compile.
+const wmSetTitle = 0x8053
 
 var setWindowText = user.NewProc("SetWindowTextW")
 
